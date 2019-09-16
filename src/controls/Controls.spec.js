@@ -17,7 +17,18 @@ test('defaults to locked and unlocked', () => {
         toggleLocked={toggleLocked} 
         toggleClosed = {toggleClosed}
         />)
-    
+
+    expect(locked).toBe(false)
+    expect(closed).toBe(false)
+})
+
+test('test the colors of the buttons', () => {
+    const display = render(<Controls closed={false} locked={false}/>)
+    display.getByText('Closed')
+    display.getByText('Unlocked')
+
+    expect(display.getByText('Closed').className).toContain('red-led')
+    expect(display.getByText('Unlocked').className).toContain('green-led')
 })
 
 // const lockedButton = getByTestId(/lockedbutton/i);
@@ -25,4 +36,5 @@ test('defaults to locked and unlocked', () => {
 
 //     fireEvent.click(lockedButton.disabled);
 
-//     expect(lockedButton).to
+//     expect(lockedButton).to        
+
