@@ -51,9 +51,18 @@ test('text changes to the state the door will be in if its clicked', () => {
     getByText(/lock gate/i)
 
     fireEvent.click(OpenButton);
-
-    getByText(/close gate/i)
 })
+
+test('closed button disabled if gate is locked', () => {
+    const {getByText} = render(<Dashboard />)
+    const LockButton = getByText(/lock gate/i)
+    const CloseButton = getByText(/close gate/i)
+    fireEvent.click(CloseButton);
+    fireEvent.click(LockButton)
+    expect(CloseButton.disabled).toBe(true);
+})
+
+
 
 // test('test the colors of the buttons', () => {
 //     const display = render(<Controls closed={false} locked={false}/>)
